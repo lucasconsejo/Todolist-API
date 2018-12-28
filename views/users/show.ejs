@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
+        <% users.forEach(function(users) { %>
+            <title><%= users.userId %>. <%= users.firstname %> <%= users.lastname %></title>
+        <% }); %>
+    </head>
+
+    <body class="container">
+        <% users.forEach(function(users) { %>
+            <h1><%= users.userId %>. <%= users.firstname %> <%= users.lastname %></h1>
+        <% }); %>
+
+        <table>
+            <tr>
+                <th>UserId</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+            </tr>
+            <% users.forEach(function(users) { %>
+                <tr>
+                    <td><%= users.userId %></td>
+                    <td><%= users.firstname %></td>
+                    <td><%= users.lastname %></td>
+                    <td><%= users.username %></td>
+                    <td><%= users.email %></td>
+                    <td><%= users.createdAt %></td>
+                    <td><%= users.updatedAt %></td>
+                </tr>
+            <% }); %>
+        </table>
+    </body>
+</html>

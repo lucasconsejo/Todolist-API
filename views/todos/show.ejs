@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
+        <% todos.forEach(function(todos) { %>
+            <title><%= todos.todoId %>. <%= todos.message %></title>
+        <% }); %>
+    </head>
+
+    <body class="container">
+        <% todos.forEach(function(todos) { %>
+            <h1><%= todos.todoId %>. <%= todos.message %></h1>
+        <% }); %>
+
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Message</th>
+                <th>Complétion</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+            </tr>
+            <% todos.forEach(function(todos) { %>
+                <tr>
+                    <td><%= todos.todoId %></td>
+                    <td><%= todos.message %></td>
+                    <td><%= todos.completion %></td>
+                    <td><%= todos.createdAt %></td>
+                    <td><%= todos.updatedAt %></td>
+                </tr>
+            <% }); %>
+        </table>
+    </body>
+</html>

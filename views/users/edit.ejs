@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
+    </head>
+
+    <body class="container">
+        <% if(users == "add user"){ %>
+            <h1><%= title %></h1>
+            <form method="POST" action="/users">
+                <input type="text" name="firstname" placeholder="firstname" /><br />
+                <input type="text" name="lastname" placeholder="lastname" /><br />
+                <input type="text" name="username" placeholder="username" /><br />
+                <input type="password" name="password" placeholder="password" /><br />
+                <input type="email" name="email" placeholder="email" /><br />
+                <input type="submit" name="submit" value="Valider" />
+            </form>
+        <% }else{ %>
+            <h1><%= title %></h1>
+            <form method="POST" action="/users/<%= id %>?_method=patch">
+                <input type="hidden" name="userId" value=<%= id %> /><br />
+                <input type="text" name="firstname" placeholder="firstname" /><br />
+                <input type="text" name="lastname" placeholder="lastname" /><br />
+                <input type="text" name="username" placeholder="username" /><br />
+                <input type="password" name="password" placeholder="password" /><br />
+                <input type="email" name="email" placeholder="email" /><br />
+                <input type="submit" name="submit" value="Valider" />
+            </form> 
+        <% } %>
+    </body>
+</html>

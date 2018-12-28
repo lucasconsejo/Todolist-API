@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
+    </head>
+
+    <body class="container">
+        <h1><%= title %></h1>
+        <table>
+            <tr>
+                <th>UserId</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+            </tr>
+            <% users.forEach(function(users) { %>
+                <tr>
+                    <td><%= users.userId %></td>
+                    <td><%= users.firstname %></td>
+                    <td><%= users.lastname %></td>
+                    <td><%= users.username %></td>
+                    <td><%= users.email %></td>
+                    <td><%= users.createdAt %></td>
+                    <td><%= users.updatedAt %></td>
+                </tr>
+            <% }); %>
+        </table>
+    </body>
+</html>

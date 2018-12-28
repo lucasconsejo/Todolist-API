@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
+    </head>
+
+    <body class="container">
+        <h1><%= title %></h1>
+        <table>
+            <tr>
+                <th>Message</th>
+                <th>Complétion</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>UserId</th>
+            </tr>
+            <% todos.forEach(function(todos) { %>
+                <tr>
+                    <td><%= todos.message %></td>
+                    <td><%= todos.completion %></td>
+                    <td><%= todos.createdAt %></td>
+                    <td><%= todos.updatedAt %></td>
+                    <td><%= todos.userId %></td>
+                </tr>
+            <% }); %>
+        </table>
+    </body>
+</html>
