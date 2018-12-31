@@ -1,34 +1,71 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
         <% todos.forEach(function(todos) { %>
             <title><%= todos.todoId %>. <%= todos.message %></title>
         <% }); %>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
     </head>
 
-    <body class="container">
-        <% todos.forEach(function(todos) { %>
-            <h1><%= todos.todoId %>. <%= todos.message %></h1>
-        <% }); %>
+    <body>
+        <ul id="add-dropdown" class="dropdown-content">
+            <li><a href="/todos/add" class="indigo-text text-lighten-2">Todo</a></li>
+            <li><a href="/users/add" class="indigo-text text-lighten-2">User</a></li>
+        </ul>
 
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Message</th>
-                <th>Complétion</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-            </tr>
+        <ul class="sidenav" id="mobile">
+            <li><a href="/todos" class="indigo-text text-lighten-2">Todos</a></li>
+            <li><a href="/users" class="indigo-text text-lighten-2">Users</a></li>
+            <li><a href="/todos/add" class="indigo-text text-lighten-2">Add Todo</a></li>
+            <li><a href="/users/add" class="indigo-text text-lighten-2">Add User</a></li>
+        </ul>
+
+        <nav>
+            <div class="nav-wrapper indigo lighten-2 navbar-fixed">
+                <a href="/" class="brand-logo">API Todolist</a>
+                <a href="" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/todos">Todos</a></li>
+                    <li><a href="/users">Users</a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="add-dropdown">Add<i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+            </div>
+        </nav>
+    
+        <div class="container">
             <% todos.forEach(function(todos) { %>
-                <tr>
-                    <td><%= todos.todoId %></td>
-                    <td><%= todos.message %></td>
-                    <td><%= todos.completion %></td>
-                    <td><%= todos.createdAt %></td>
-                    <td><%= todos.updatedAt %></td>
-                </tr>
+                <h1><%= todos.todoId %>. <%= todos.message %></h1>
             <% }); %>
-        </table>
+
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Message</th>
+                    <th>Complétion</th>
+                    <th>CreatedAt</th>
+                    <th>UpdatedAt</th>
+                    <th></th>
+                </tr>
+                <% todos.forEach(function(todos) { %>
+                    <tr>
+                        <td><%= todos.todoId %></td>
+                        <td><%= todos.message %></td>
+                        <td><%= todos.completion %></td>
+                        <td><%= todos.createdAt %></td>
+                        <td><%= todos.updatedAt %></td>
+                        <td><a href="/todos/<%= todos.todoId %>/edit" class="btn waves-effect waves-light indigo lighten-2"><i class="material-icons">edit</i></td>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+        <script type="text/javascript">
+            $(".dropdown-trigger").dropdown();
+            $('.sidenav').sidenav();
+        </script>
     </body>
 </html>

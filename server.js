@@ -10,7 +10,7 @@ const methodOverride = require('method-override')
 const requestSQL = require('./models/requestBdd.js')
 
 let server = express()
-let PORT = 8081
+let PORT = 8083
 
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
@@ -20,57 +20,53 @@ server.use(express.static(path.join(__dirname, '/public')))
 server.set('views', './views')
 server.set('view engine', 'ejs')
 
-// POST /todos
+// POST /todos DONE
 server.post('/todos', (req, res, next) =>{
-    requestSQL.insertTodo(req.body.message, req.body.completion)
+    requestSQL.insertTodo(req.body.userId, req.body.message, req.body.completion)
     res.format({
       html: () => { 
         res.redirect(301, "/todos")
       },
       json: () => {
-        res.status(200).end()
+        res.status(200)
+        res.send({message: "success"}).end()
       }
     })
 })
 
 
-// GET /todos/add
+// GET /todos/add DONE
 server.get('/todos/add', (req, res, next) =>{
     res.render('todos/edit',{
-        title: 'Add Todos',
+        title: 'Add Todo',
         todos: "add"
       }) 
 })
 
 
-// GET /todos/:todoId
+// GET /todos/:todoId DONE
 server.get('/todos/:todoId', (req, res, next) =>{
-    if (!req.params.todoId) {
-        return res.status(404).send('NOT FOUND');
-    }
-    else{
-        requestSQL.selectTodo(res, req.params.todoId)
-    }
+    requestSQL.selectTodo(res, req.params.todoId)
 })
 
 
-// GET /todos/:todoId/edit
+// GET /todos/:todoId/edit DONE
 server.get('/todos/:todoId/edit', (req, res, next) =>{
     res.render('todos/edit',{
-        title: 'Edit Todos',
+        title: 'Edit Todo',
         todos: "edit",
         id: req.params.todoId
       }) 
 })
 
 
-// GET /todos
+// GET /todos DONE
 server.get('/todos', (req, res, next) =>{
     requestSQL.selectAll(res)
 })
 
 
-// DELETE /todos/:todoId
+// DELETE /todos/:todoId DONE
 server.delete('/todos/:todoId', (req, res, next) =>{
     if (!req.params.todoId) {
         return res.status(404).send('NOT FOUND');
@@ -82,14 +78,15 @@ server.delete('/todos/:todoId', (req, res, next) =>{
                 res.redirect(301, "/todos")
             },
             json: () => {
-                res.status(200).end()
+                res.status(200)
+                res.send({message: "success"}).end()
             }
         })
     }
 })
 
 
-// PATCH /todos/:todoId
+// PATCH /todos/:todoId DONE
 server.patch('/todos/:todoId', (req, res, next) =>{
     if (!req.params.todoId) {
         return res.status(404).send('NOT FOUND');
@@ -101,25 +98,29 @@ server.patch('/todos/:todoId', (req, res, next) =>{
                 res.redirect(301, "/todos")
             },
             json: () => {
-                res.status(200).end()
+                res.status(200)
+                res.send({message: "success"}).end()
             }
         })
     }
 })
 
-// CREATE
+// CREATE /users DONE
 server.post('/users', (req, res, next) =>{
     requestSQL.insertUser(req.body.firstname, req.body.lastname, req.body.username, req.body.password, req.body.email)
     res.format({
         html: () => { 
-          res.redirect(301, "/users")
+            res.redirect(301, "/users")
         },
         json: () => {
-          res.status(200).end()
+            res.status(200)
+            res.send({message : "success"}).end()
         }
       })
 })
 
+
+// GET /users/add DONE
 server.get('/users/add', (req, res, next) =>{
     res.render('users/edit',{
         title: 'Add User',
@@ -127,6 +128,7 @@ server.get('/users/add', (req, res, next) =>{
       }) 
 })
 
+// GET /users/:userId DONE
 server.get('/users/:userId', (req, res, next) =>{
     if (!req.params.userId) {
         return res.status(404).send('NOT FOUND');
@@ -136,7 +138,7 @@ server.get('/users/:userId', (req, res, next) =>{
     }
 })
 
-// GET /users/:userId/edit
+// GET /users/:userId/edit DONE
 server.get('/users/:userId/edit', (req, res, next) =>{
     res.render('users/edit',{
         title: 'Edit User',
@@ -145,12 +147,23 @@ server.get('/users/:userId/edit', (req, res, next) =>{
       }) 
 })
 
-// READ
+
+// GET /users/:userId/todos DONE
+server.get('/users/:userId/todos', (req, res, next) =>{
+    if (!req.params.userId) {
+        return res.status(404).send('NOT FOUND');
+    }
+    else{
+        requestSQL.selectTodosUser(res, req.params.userId)
+    }
+})
+
+// READ /users DONE
 server.get('/users', (req, res, next) =>{
     requestSQL.selectAllUsers(res)
 })
 
-//UPDATE
+//UPDATE  /users/:userId DONE
 server.patch('/users/:userId', (req, res, next) =>{
     requestSQL.updateUser(req.params.userId, req.body.firstname, req.body.lastname, req.body.username, req.body.password, req.body.email)
     res.format({
@@ -158,33 +171,29 @@ server.patch('/users/:userId', (req, res, next) =>{
             res.redirect(301, "/users")
         },
         json: () => {
-            res.status(200).end()
+            res.status(200)
+            res.send({message: "success"}).end()
         }
     })
 })
 
-//DELETE
+//DELETE  /users/:userId DONE
 server.delete('/users/:userId', (req, res, next) =>{
     if (!req.params.userId) {
         return res.status(404).send('NOT FOUND');
     }
     else{
-        requestSQL.deleteUser(req.body.userId)
+        requestSQL.deleteUser(req.params.userId)
         res.format({
             html: () => { 
                 res.redirect(301, "/users")
             },
             json: () => {
-                res.status(200).end()
+                res.status(200)
+                res.send({message: "success"}).end()
             }
         })
     }
-})
-
-
-// GET *
-server.get("*", (req, res, next) =>{
-    res.redirect(301, '/todos')
 })
 
 // ALL /
@@ -193,8 +202,18 @@ server.all('/', (req, res, next) =>{
 })
 
 server.use((req, res) => {  
-    res.status(404)  
-    res.end('Not Found')
+    res.format({
+        html: () => { 
+            res.render('error/error404',{
+                title: 'Page Not Found',
+                port: PORT
+              }) 
+        },
+        json: () => {
+            res.status(404)
+            res.send({status: "404 not found"}).end()
+        }
+    })
 })
 
 // Server start listen

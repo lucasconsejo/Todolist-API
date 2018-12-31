@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
+    </head>
+
+    <body class="container">
+        <h1><%= title %></h1>
+        <p>The page you are looking for does not exist. Please check the URL.</p>
+
+        <h4>Here are the available paths :</h4>
+        <ul>
+            <li>ALL / => <a href="/" class="indigo-text text-lighten-2">http://localhost:<%= port %>/</a> (Redirect to /todos)</li>
+            <li>GET /todos => <a href="/todos" class="indigo-text text-lighten-2">http://localhost:<%= port %>/todos</a></li>
+            <li>GET /users => <a href="/users" class="indigo-text text-lighten-2">http://localhost:<%= port %>/users</a></li>
+            <li>GET /todos/add => <a href="/todos/add" class="indigo-text text-lighten-2">http://localhost:<%= port %>/todos/add</a></li>
+            <li>GET /users/add => <a href="/users/add" class="indigo-text text-lighten-2">http://localhost:<%= port %>/users/add</a></li>
+            <li>GET /todos/:todoId => <a href="/todos/1" class="indigo-text text-lighten-2">http://localhost:<%= port %>/todos/1</a></li>
+            <li>GET /users/:userId => <a href="/users/1" class="indigo-text text-lighten-2">http://localhost:<%= port %>/users/1</a></li>
+            <li>GET /todos/:todoId/edit => <a href="/todos/1/edit" class="indigo-text text-lighten-2">http://localhost:<%= port %>/todos/1/edit</a></li>
+            <li>GET /users/:userId/edit => <a href="/users/1/edit" class="indigo-text text-lighten-2">http://localhost:<%= port %>/users/1/edit</a></li>
+            <li>GET /users/:userId/todos => <a href="/users/1/todos" class="indigo-text text-lighten-2">http://localhost:<%= port %>/users/1/todos</a></li>
+        </ul>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    </body>
+</html>

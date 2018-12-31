@@ -9,7 +9,6 @@ module.exports = {
         let sql = "SELECT * FROM todos";
         connexion.query(sql, function (err, result, fields) {
         if (err) throw err;
-            console.log("--> SELECT ALL Todos")
             res.format({
                 html: () => { 
                 res.render('todos/index',{
@@ -18,7 +17,8 @@ module.exports = {
                 }) 
                 },
                 json: () => {
-                res.json(result) 
+                    res.json(result) 
+                    res.status(200).end()
                 }
             })
         })
@@ -30,19 +30,20 @@ module.exports = {
             console.log("--> SELECT todoId"+id)
             res.format({
                 html: () => { 
-                res.render('todos/show',{
-                    todos: result
-                }) 
+                    res.render('todos/show',{
+                        todos: result
+                    }) 
                 },
                 json: () => {
-                res.json(result) 
+                    res.json(result) 
+                    res.status(200).end()
                 }
             })
         });
     },
-    insertTodo(message, completion){
+    insertTodo(userId, message, completion){
         connexion.connect(function(err) {
-            let sql = "INSERT INTO todos (todoId, message, completion, createdAt, updatedAt, userId) VALUES (NULL, '"+message+"', '"+completion+"', NOW(), 'none', NULL)"
+            let sql = "INSERT INTO todos (todoId, message, completion, createdAt, updatedAt, userId) VALUES (NULL, '"+message+"', '"+completion+"', NOW(), 'none', "+userId+")"
             connexion.query(sql, function (err, result) {
                 if (err) throw err;
                     console.log("--> INSERT Todo")
@@ -86,10 +87,30 @@ module.exports = {
                         },
                         json: () => {
                             res.json(result) 
+                            res.status(200).end()
                         }
                     })
             })
         })
+    },
+    selectTodosUser(res, userId){
+        let sql = "SELECT * FROM todos INNER JOIN users ON todos.userId = users.userId where users.userId="+userId
+        connexion.query(sql, function (err, result, fields) {
+        if (err) throw err;
+            console.log("--> SELECT ALL todos where userId="+userId)
+            res.format({
+                html: () => { 
+                res.render('users/show',{
+                    showAllTodos: "true",
+                    users: result
+                }) 
+                },
+                json: () => {
+                res.json(result) 
+                res.status(200).end()
+                }
+            })
+        });
     },
     selectUser(res, id){
         let sql = "SELECT * FROM users where userId="+id
@@ -99,11 +120,13 @@ module.exports = {
             res.format({
                 html: () => { 
                 res.render('users/show',{
+                    showAllTodos: "false",
                     users: result
                 }) 
                 },
                 json: () => {
                 res.json(result) 
+                res.status(200).end()
                 }
             })
         });

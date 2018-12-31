@@ -1,38 +1,97 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
         <% users.forEach(function(users) { %>
             <title><%= users.userId %>. <%= users.firstname %> <%= users.lastname %></title>
         <% }); %>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
     </head>
 
-    <body class="container">
-        <% users.forEach(function(users) { %>
-            <h1><%= users.userId %>. <%= users.firstname %> <%= users.lastname %></h1>
-        <% }); %>
+    <body>
+        <ul id="add-dropdown" class="dropdown-content">
+            <li><a href="/todos/add" class="indigo-text text-lighten-2">Todo</a></li>
+            <li><a href="/users/add" class="indigo-text text-lighten-2">User</a></li>
+        </ul>
 
-        <table>
-            <tr>
-                <th>UserId</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-            </tr>
-            <% users.forEach(function(users) { %>
-                <tr>
-                    <td><%= users.userId %></td>
-                    <td><%= users.firstname %></td>
-                    <td><%= users.lastname %></td>
-                    <td><%= users.username %></td>
-                    <td><%= users.email %></td>
-                    <td><%= users.createdAt %></td>
-                    <td><%= users.updatedAt %></td>
-                </tr>
-            <% }); %>
-        </table>
+        <ul class="sidenav" id="mobile">
+            <li><a href="/todos" class="indigo-text text-lighten-2">Todos</a></li>
+            <li><a href="/users" class="indigo-text text-lighten-2">Users</a></li>
+            <li><a href="/todos/add" class="indigo-text text-lighten-2">Add Todo</a></li>
+            <li><a href="/users/add" class="indigo-text text-lighten-2">Add User</a></li>
+        </ul>
+
+        <nav>
+            <div class="nav-wrapper indigo lighten-2 navbar-fixed">
+                <a href="/" class="brand-logo">API Todolist</a>
+                <a href="" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/todos">Todos</a></li>
+                    <li><a href="/users">Users</a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="add-dropdown">Add<i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <% if(showAllTodos == "true") { %>
+                <h1>All todos of <%= users[0].firstname %> <%= users[0].lastname %></h1>
+
+                <table>
+                    <tr>
+                        <th>TodoId</th>
+                        <th>Message</th>
+                        <th>Complétion</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                    </tr>
+                    <% users.forEach(function(users) { %>
+                        <tr>
+                            <td><%= users.todoId %></td>
+                            <td><%= users.message %></td>
+                            <td><%= users.completion %></td>
+                            <td><%= users.createdAt %></td>
+                            <td><%= users.updatedAt %></td>
+                        </tr>
+                    <% }); %>
+                </table>
+            <% }else{ %>
+                <% users.forEach(function(users) { %>
+                    <h1><%= users.userId %>. <%= users.firstname %> <%= users.lastname %></h1>
+                <% }); %>
+
+                <table>
+                    <tr>
+                        <th>UserId</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                        <th></th>
+                    </tr>
+                    <% users.forEach(function(users) { %>
+                        <tr>
+                            <td><%= users.userId %></td>
+                            <td><%= users.firstname %></td>
+                            <td><%= users.lastname %></td>
+                            <td><%= users.username %></td>
+                            <td><%= users.email %></td>
+                            <td><%= users.createdAt %></td>
+                            <td><%= users.updatedAt %></td>
+                            <td><a href="/users/<%= users.userId %>/edit" class="btn waves-effect waves-light indigo lighten-2"><i class="material-icons">edit</i></td>
+                        </tr>
+                    <% }); %>
+                </table>
+            <% } %>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+        <script type="text/javascript">
+            $(".dropdown-trigger").dropdown();
+            $('.sidenav').sidenav();
+        </script>
     </body>
 </html>
