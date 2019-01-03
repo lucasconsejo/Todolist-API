@@ -10,7 +10,7 @@ const methodOverride = require('method-override')
 const requestSQL = require('./models/requestBdd.js')
 
 let server = express()
-let PORT = 8081
+let PORT = 8080
 
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
