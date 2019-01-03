@@ -34,33 +34,38 @@
         </nav>
 
         <div class="container">
-            <h1><%= title %></h1>
-            <table>
-                <tr>
-                    <th>UserId</th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>CreatedAt</th>
-                    <th>UpdatedAt</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <% users.forEach(function(users) { %>
+            <% if(users.firstname != "") { %>
+                <h1><%= title %> <%= users.firstname %></h1>
+                <table>
                     <tr>
-                        <td><%= users.userId %></td>
-                        <td><%= users.firstname %></td>
-                        <td><%= users.lastname %></td>
-                        <td><%= users.username %></td>
-                        <td><%= users.email %></td>
-                        <td><%= users.createdAt %></td>
-                        <td><%= users.updatedAt %></td>
-                        <td><a href="/users/<%= users.userId %>" class="btn waves-effect waves-light amber darken-3"><i class="material-icons">remove_red_eye</i></td>
-                        <td><a href="/users/<%= users.userId %>/edit" class="btn waves-effect waves-light indigo lighten-2"><i class="material-icons">edit</i></td>
+                        <th>UserId</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                <% }); %>
-            </table>
+                    <% users.forEach(function(users) { %>
+                        <tr>
+                            <td><%= users.userId %></td>
+                            <td><%= users.firstname %></td>
+                            <td><%= users.lastname %></td>
+                            <td><%= users.username %></td>
+                            <td><%= users.email %></td>
+                            <td><%= users.createdAt %></td>
+                            <td><%= users.updatedAt %></td>
+                            <td><a href="/users/<%= users.userId %>" class="btn waves-effect waves-light amber darken-3"><i class="material-icons">remove_red_eye</i></td>
+                            <td><a href="/users/<%= users.userId %>/edit" class="btn waves-effect waves-light indigo lighten-2"><i class="material-icons">edit</i></td>
+                        </tr>
+                    <% }); %>
+                </table>
+            <% }else{ %>
+                <h2>No user found</h2>
+                <h5>This user doesn't exist...</h5>
+            <% } %>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 

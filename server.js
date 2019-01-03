@@ -10,7 +10,7 @@ const methodOverride = require('method-override')
 const requestSQL = require('./models/requestBdd.js')
 
 let server = express()
-let PORT = 8083
+let PORT = 8084
 
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
@@ -35,7 +35,7 @@ server.post('/todos', (req, res, next) =>{
 })
 
 
-// GET /todos/add DONE
+// GET /todos/add
 server.get('/todos/add', (req, res, next) =>{
     res.render('todos/edit',{
         title: 'Add Todo',
@@ -44,13 +44,13 @@ server.get('/todos/add', (req, res, next) =>{
 })
 
 
-// GET /todos/:todoId DONE
+// GET /todos/:todoId
 server.get('/todos/:todoId', (req, res, next) =>{
     requestSQL.selectTodo(res, req.params.todoId)
 })
 
 
-// GET /todos/:todoId/edit DONE
+// GET /todos/:todoId/edit
 server.get('/todos/:todoId/edit', (req, res, next) =>{
     res.render('todos/edit',{
         title: 'Edit Todo',
@@ -60,13 +60,13 @@ server.get('/todos/:todoId/edit', (req, res, next) =>{
 })
 
 
-// GET /todos DONE
+// GET /todos
 server.get('/todos', (req, res, next) =>{
-    requestSQL.selectAll(res)
+    requestSQL.selectAllTodos(res)
 })
 
 
-// DELETE /todos/:todoId DONE
+// DELETE /todos/:todoId
 server.delete('/todos/:todoId', (req, res, next) =>{
     if (!req.params.todoId) {
         return res.status(404).send('NOT FOUND');
@@ -86,7 +86,7 @@ server.delete('/todos/:todoId', (req, res, next) =>{
 })
 
 
-// PATCH /todos/:todoId DONE
+// PATCH /todos/:todoId
 server.patch('/todos/:todoId', (req, res, next) =>{
     if (!req.params.todoId) {
         return res.status(404).send('NOT FOUND');
@@ -105,7 +105,7 @@ server.patch('/todos/:todoId', (req, res, next) =>{
     }
 })
 
-// CREATE /users DONE
+// CREATE /users
 server.post('/users', (req, res, next) =>{
     requestSQL.insertUser(req.body.firstname, req.body.lastname, req.body.username, req.body.password, req.body.email)
     res.format({
@@ -120,7 +120,7 @@ server.post('/users', (req, res, next) =>{
 })
 
 
-// GET /users/add DONE
+// GET /users/add
 server.get('/users/add', (req, res, next) =>{
     res.render('users/edit',{
         title: 'Add User',
@@ -128,7 +128,7 @@ server.get('/users/add', (req, res, next) =>{
       }) 
 })
 
-// GET /users/:userId DONE
+// GET /users/:userId
 server.get('/users/:userId', (req, res, next) =>{
     if (!req.params.userId) {
         return res.status(404).send('NOT FOUND');
@@ -138,7 +138,7 @@ server.get('/users/:userId', (req, res, next) =>{
     }
 })
 
-// GET /users/:userId/edit DONE
+// GET /users/:userId/edit
 server.get('/users/:userId/edit', (req, res, next) =>{
     res.render('users/edit',{
         title: 'Edit User',
@@ -148,7 +148,7 @@ server.get('/users/:userId/edit', (req, res, next) =>{
 })
 
 
-// GET /users/:userId/todos DONE
+// GET /users/:userId/todos
 server.get('/users/:userId/todos', (req, res, next) =>{
     if (!req.params.userId) {
         return res.status(404).send('NOT FOUND');
@@ -158,12 +158,12 @@ server.get('/users/:userId/todos', (req, res, next) =>{
     }
 })
 
-// READ /users DONE
+// READ /users
 server.get('/users', (req, res, next) =>{
     requestSQL.selectAllUsers(res)
 })
 
-//UPDATE  /users/:userId DONE
+//UPDATE  /users/:userId
 server.patch('/users/:userId', (req, res, next) =>{
     requestSQL.updateUser(req.params.userId, req.body.firstname, req.body.lastname, req.body.username, req.body.password, req.body.email)
     res.format({
@@ -177,7 +177,7 @@ server.patch('/users/:userId', (req, res, next) =>{
     })
 })
 
-//DELETE  /users/:userId DONE
+//DELETE  /users/:userId
 server.delete('/users/:userId', (req, res, next) =>{
     if (!req.params.userId) {
         return res.status(404).send('NOT FOUND');
@@ -201,6 +201,8 @@ server.all('/', (req, res, next) =>{
     res.redirect(301, '/todos')
 })
 
+
+// Page Not Found
 server.use((req, res) => {  
     res.format({
         html: () => { 
