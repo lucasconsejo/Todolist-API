@@ -67,34 +67,39 @@
                     <h5>This user has no todos...</h5>
                 <% } %>
             <% }else{ %>
-                <% users.forEach(function(users) { %>
-                    <h1><%= users.userId %>. <%= users.firstname %> <%= users.lastname %> <a href="/users/<%= users.userId %>/todos" class="btn waves-effect waves-light green lighten-2">Show all Todos</a></h1>
-                <% }); %>
-
-                <table>
-                    <tr>
-                        <th>UserId</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>CreatedAt</th>
-                        <th>UpdatedAt</th>
-                        <th></th>
-                    </tr>
+                <% if(locals.users[0]) { %>
                     <% users.forEach(function(users) { %>
-                        <tr>
-                            <td><%= users.userId %></td>
-                            <td><%= users.firstname %></td>
-                            <td><%= users.lastname %></td>
-                            <td><%= users.username %></td>
-                            <td><%= users.email %></td>
-                            <td><%= users.createdAt %></td>
-                            <td><%= users.updatedAt %></td>
-                            <td><a href="/users/<%= users.userId %>/edit" class="btn waves-effect waves-light indigo lighten-2"><i class="material-icons">edit</i></td>
-                        </tr>
+                        <h1><%= users.userId %>. <%= users.firstname %> <%= users.lastname %> <a href="/users/<%= users.userId %>/todos" class="btn waves-effect waves-light green lighten-2">Show all Todos</a></h1>
                     <% }); %>
-                </table>
+
+                    <table>
+                        <tr>
+                            <th>UserId</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>CreatedAt</th>
+                            <th>UpdatedAt</th>
+                            <th></th>
+                        </tr>
+                        <% users.forEach(function(users) { %>
+                            <tr>
+                                <td><%= users.userId %></td>
+                                <td><%= users.firstname %></td>
+                                <td><%= users.lastname %></td>
+                                <td><%= users.username %></td>
+                                <td><%= users.email %></td>
+                                <td><%= users.createdAt %></td>
+                                <td><%= users.updatedAt %></td>
+                                <td><a href="/users/<%= users.userId %>/edit" class="btn waves-effect waves-light indigo lighten-2"><i class="material-icons">edit</i></td>
+                            </tr>
+                        <% }); %>
+                    </table>
+                <% }else{ %>
+                    <h2>No user found</h2>
+                    <h5>This user doesn't exist...</h5>
+                <% } %>
             <% } %>
         </div>
 

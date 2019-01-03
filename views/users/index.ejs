@@ -34,7 +34,7 @@
         </nav>
 
         <div class="container">
-            <% if(users.firstname != "") { %>
+            <% if(locals.users[0]){ %>
                 <h1><%= title %> <%= users.firstname %></h1>
                 <table>
                     <tr>
@@ -63,8 +63,8 @@
                     <% }); %>
                 </table>
             <% }else{ %>
-                <h2>No user found</h2>
-                <h5>This user doesn't exist...</h5>
+                <h2>No users found</h2>
+                <h5>No users have been created</h5>
             <% } %>
         </div>
 

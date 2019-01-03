@@ -10,7 +10,7 @@ const methodOverride = require('method-override')
 const requestSQL = require('./models/requestBdd.js')
 
 let server = express()
-let PORT = 8084
+let PORT = 8081
 
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
@@ -37,10 +37,7 @@ server.post('/todos', (req, res, next) =>{
 
 // GET /todos/add
 server.get('/todos/add', (req, res, next) =>{
-    res.render('todos/edit',{
-        title: 'Add Todo',
-        todos: "add"
-      }) 
+    requestSQL.selectBoxUser(res)
 })
 
 

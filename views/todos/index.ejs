@@ -34,29 +34,34 @@
         </nav>
 
         <div class="container">
-            <h1><%= title %></h1>
-            <table>
-                <tr>
-                    <th>Message</th>
-                    <th>Complétion</th>
-                    <th>CreatedAt</th>
-                    <th>UpdatedAt</th>
-                    <th>UserId</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <% todos.forEach(function(todos) { %>
+            <% if(locals.todos[0]){ %>
+                <h1><%= title %></h1>
+                <table>
                     <tr>
-                        <td><%= todos.message %></td>
-                        <td><%= todos.completion %></td>
-                        <td><%= todos.createdAt %></td>
-                        <td><%= todos.updatedAt %></td>
-                        <td><%= todos.userId %></td>
-                        <td><a href="/todos/<%= todos.todoId %>" class="btn waves-effect waves-light amber darken-3"><i class="material-icons">remove_red_eye</i></td>
-                        <td><a href="/todos/<%= todos.todoId %>/edit" class="btn waves-effect waves-light indigo lighten-2"><i class="material-icons">edit</i></td>
+                        <th>Message</th>
+                        <th>Complétion</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                        <th>UserId</th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                <% }); %>
-            </table>
+                    <% todos.forEach(function(todos) { %>
+                        <tr>
+                            <td><%= todos.message %></td>
+                            <td><%= todos.completion %></td>
+                            <td><%= todos.createdAt %></td>
+                            <td><%= todos.updatedAt %></td>
+                            <td><%= todos.userId %></td>
+                            <td><a href="/todos/<%= todos.todoId %>" class="btn waves-effect waves-light amber darken-3"><i class="material-icons">remove_red_eye</i></td>
+                            <td><a href="/todos/<%= todos.todoId %>/edit" class="btn waves-effect waves-light indigo lighten-2"><i class="material-icons">edit</i></td>
+                        </tr>
+                    <% }); %>
+                </table>
+            <% }else{ %>
+                <h2>No todos found</h2>
+                <h5>No todos have been created</h5>
+            <% } %>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
