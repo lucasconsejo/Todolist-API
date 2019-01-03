@@ -21,7 +21,10 @@ L'API devait être multiformat et devait répondre au format HTML, mais égaleme
 
 ## Installation du projet
 Une fois le projet cloné :
-* Dans le dossier du projet : exécutez ***npm install*** pour récupérer les node_modules.
+* Pour récupérer les node_modules :
+    ```js
+    npm install
+    ```
 * Créez une base de données, nommez la : ***node_js***
 * Importez le fichier sql [node_js.sql](https://github.com/lucasconsejo/API_Todolist/blob/master/bdd/node_js.sql), dans votre base de données, afin d'importer les différentes tables.
 * Dans le fichier [bdd.js](https://github.com/lucasconsejo/API_Todolist/blob/master/bdd/bdd.js), remplacez *user* et *password* par vos identifiants de votre base de données mysql.
@@ -30,7 +33,10 @@ Une fois le projet cloné :
 
 ### `Lancer le serveur`
 
-Dans le dossier du projet : exécutez ***node ./server.js*** pour lancer le serveur.
+Pour lancer le serveur :
+```js
+node ./server.js
+```
 Par défaut, le serveur écoutera sur le **port 8080**.
 
 ### `Rendu HTML`
