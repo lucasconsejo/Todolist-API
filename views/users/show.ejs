@@ -4,9 +4,10 @@
         <% users.forEach(function(users) { %>
             <title><%= users.userId %>. <%= users.firstname %> <%= users.lastname %></title>
         <% }); %>
+        <link rel="icon" type="image/png" href="/assets/img/icon.png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
+        <link href="/assets/css/styles.css" rel="stylesheet">
     </head>
 
     <body>
@@ -44,6 +45,8 @@
                         <th>Complétion</th>
                         <th>CreatedAt</th>
                         <th>UpdatedAt</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     <% users.forEach(function(users) { %>
                         <tr>
@@ -52,12 +55,15 @@
                             <td><%= users.completion %></td>
                             <td><%= users.createdAt %></td>
                             <td><%= users.updatedAt %></td>
+                            <td><a href="/todos/<%= users.todoId %>" class="btn waves-effect waves-light amber darken-3"><i class="material-icons">remove_red_eye</i></td>
+                            <td><a href="/todos/<%= users.todoId %>/edit" class="btn waves-effect waves-light indigo lighten-2"><i class="material-icons">edit</i></td>
+                            
                         </tr>
                     <% }); %>
                 </table>
             <% }else{ %>
                 <% users.forEach(function(users) { %>
-                    <h1><%= users.userId %>. <%= users.firstname %> <%= users.lastname %></h1>
+                    <h1><%= users.userId %>. <%= users.firstname %> <%= users.lastname %> <a href="/users/<%= users.userId %>/todos" class="btn waves-effect waves-light green lighten-2">Show all Todos</a></h1>
                 <% }); %>
 
                 <table>

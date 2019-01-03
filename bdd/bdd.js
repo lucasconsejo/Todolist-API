@@ -9,8 +9,12 @@ var connexion = mysql.createConnection({
   });
 
 connexion.connect(function(err) {
-    if (err) throw err;
-        console.log("Connexion avec mysql --> REUSSI");
+    if(err){
+      console.log("Connexion avec mysql --> Refusé\n"+err+"\nVerifiez la saisie dans mysql/createConnection (bdd/bdd.js ligne 4)")
+    }
+    else{
+      console.log("Connexion avec mysql --> REUSSI")
+    }
   });
 
 module.exports = connexion

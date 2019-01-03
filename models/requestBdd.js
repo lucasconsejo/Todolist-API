@@ -12,7 +12,7 @@ module.exports = {
             res.format({
                 html: () => { 
                 res.render('todos/index',{
-                    title: 'Liste de toutes les tâches',
+                    title: 'List of all tasks',
                     todos: result
                 }) 
                 },
@@ -81,7 +81,7 @@ module.exports = {
                     res.format({
                         html: () => { 
                             res.render('users/index',{
-                                title: 'Liste de tous les users',
+                                title: 'List of all users',
                                 users: result
                             }) 
                         },

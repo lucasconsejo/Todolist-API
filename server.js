@@ -20,7 +20,7 @@ server.use(express.static(path.join(__dirname, '/public')))
 server.set('views', './views')
 server.set('view engine', 'ejs')
 
-// POST /todos DONE
+// POST /todos
 server.post('/todos', (req, res, next) =>{
     requestSQL.insertTodo(req.body.userId, req.body.message, req.body.completion)
     res.format({
