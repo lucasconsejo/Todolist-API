@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
+/*
+    Lucas CONSEJO & Théo FERREIRA
+    API_TODOLIST
+    Description : API Todolist multiformat avec rendu HTML et JSON
+    Dernière update : 05/01/2019
+*/
+
 // MODULES NECESSAIRES
 const express = require('express')
 const bodyParser = require('body-parser') 

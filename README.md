@@ -58,6 +58,7 @@ Voici les url disponibles au format JSON :
 * **GET** http://localhost:8080/users Renvoi la liste de tous les users
 * **GET** http://localhost:8080/todos/:todoId Renvoi une todo
 * **GET** http://localhost:8080/users/:userId Renvoi un user
+* **GET** http://localhost:8080/users/:userId/todos Renvoi la liste de toutes les todos d'un user
 * **POST** http://localhost:8080/todos Renvoi le message "success"
 * **POST** http://localhost:8080/users Renvoi le message "success"
 * **PATCH** http://localhost:8080/todos/:todoId Renvoi le message "success"
