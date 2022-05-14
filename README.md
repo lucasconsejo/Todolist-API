@@ -1,3 +1,4 @@
+⚠️ Deprecated project
 # Lucas Consejo & Théo Ferreira - TP API Todolist
 
 Ingésup B2B Bordeaux
